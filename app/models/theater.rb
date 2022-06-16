@@ -1,4 +1,5 @@
 class Theater < ApplicationRecord
-  validates :name, :address, presence: true
-  belongs_to :movie
+  validates :theater_name, :theater_address, presence: true
+
+  has_many :screens
 end
