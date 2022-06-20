@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_16_132247) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_20_102207) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -77,6 +77,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_16_132247) do
     t.index ["screen_id"], name: "index_seats_on_screen_id"
   end
 
+  create_table "shows", force: :cascade do |t|
+    t.date "show_date"
+    t.time "show_time"
+    t.integer "movie_id", null: false
+    t.integer "screen_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_shows_on_movie_id"
+    t.index ["screen_id"], name: "index_shows_on_screen_id"
+  end
+
   create_table "theaters", force: :cascade do |t|
     t.string "theater_name"
     t.text "theater_address"
@@ -101,4 +112,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_16_132247) do
   add_foreign_key "screens", "movies"
   add_foreign_key "screens", "theaters"
   add_foreign_key "seats", "screens"
+  add_foreign_key "shows", "movies"
+  add_foreign_key "shows", "screens"
 end
