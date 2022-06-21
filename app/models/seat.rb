@@ -1,6 +1,4 @@
 class Seat < ApplicationRecord
-  validates :no_of_seats
-
-  has_many :bookings
-  belongs_to :screen
+  belongs_to :booking
+  belongs_to :show
 end

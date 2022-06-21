@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_20_102207) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_21_070250) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_20_102207) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "bookings", force: :cascade do |t|
+    t.date "booking_date"
+    t.integer "number_of_seats"
+    t.integer "booking_status"
+    t.integer "show_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["show_id"], name: "index_bookings_on_show_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "category_name"
     t.datetime "created_at", null: false
@@ -59,43 +71,41 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_20_102207) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "screens", force: :cascade do |t|
-    t.string "screen_name"
-    t.integer "movie_id", null: false
-    t.integer "theater_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["movie_id"], name: "index_screens_on_movie_id"
-    t.index ["theater_id"], name: "index_screens_on_theater_id"
-  end
-
   create_table "seats", force: :cascade do |t|
     t.integer "no_of_seats"
-    t.integer "screen_id", null: false
+    t.integer "show_id", null: false
+    t.integer "booking_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["screen_id"], name: "index_seats_on_screen_id"
+    t.index ["booking_id"], name: "index_seats_on_booking_id"
+    t.index ["show_id"], name: "index_seats_on_show_id"
   end
 
   create_table "shows", force: :cascade do |t|
     t.date "show_date"
     t.time "show_time"
-    t.integer "movie_id", null: false
-    t.integer "screen_id", null: false
+    t.integer "movie_id"
+    t.integer "theater_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_shows_on_movie_id"
-    t.index ["screen_id"], name: "index_shows_on_screen_id"
+    t.index ["theater_id"], name: "index_shows_on_theater_id"
   end
 
   create_table "theaters", force: :cascade do |t|
     t.string "theater_name"
+    t.string "city"
     t.text "theater_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.date "birth_date"
+    t.string "gender"
+    t.string "contact_number"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -109,9 +119,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_20_102207) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "screens", "movies"
-  add_foreign_key "screens", "theaters"
-  add_foreign_key "seats", "screens"
-  add_foreign_key "shows", "movies"
-  add_foreign_key "shows", "screens"
+  add_foreign_key "bookings", "shows"
+  add_foreign_key "bookings", "users"
+  add_foreign_key "seats", "bookings"
+  add_foreign_key "seats", "shows"
 end
