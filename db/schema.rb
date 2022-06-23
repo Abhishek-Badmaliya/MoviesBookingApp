@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_22_084218) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_23_053029) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -55,6 +55,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_22_084218) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "category_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "movies", force: :cascade do |t|
     t.string "movie_title"
     t.text "movie_description"
@@ -62,8 +68,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_22_084218) do
     t.string "movie_language"
     t.date "movie_release_date"
     t.string "movie_country"
-    t.integer "movie_category"
     t.integer "movie_rating"
+    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
