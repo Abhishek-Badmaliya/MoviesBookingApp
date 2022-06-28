@@ -70,8 +70,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_053029) do
     t.string "movie_country"
     t.integer "movie_rating"
     t.integer "category_id"
+    t.integer "theater_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["theater_id"], name: "index_movies_on_theater_id"
   end
 
   create_table "shows", force: :cascade do |t|
@@ -106,6 +108,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_053029) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
