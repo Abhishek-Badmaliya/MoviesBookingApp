@@ -2,8 +2,6 @@ Rails.application.routes.draw do
   devise_for :users
   resources :movies
   resources :theaters
-  resources :screens
-  resources :seats
   resources :shows
   resources :bookings
 
