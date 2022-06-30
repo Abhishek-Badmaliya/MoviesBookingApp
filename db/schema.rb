@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_29_113005) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_30_091150) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -93,7 +93,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_29_113005) do
     t.integer "movie_duration"
     t.string "movie_language"
     t.date "movie_release_date"
-    t.string "movie_country"
     t.integer "movie_rating"
     t.integer "category_id"
     t.integer "theater_id"
