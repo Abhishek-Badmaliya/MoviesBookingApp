@@ -10,12 +10,12 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.new(booking_params)
+    @booking = current_user.booking.new(booking_params)
     if @booking.save
       flash[:notice] = "Booking's details Added Successfully!"
       redirect_to bookings_path
     else
-      flash[:error] = "Booking can't be created!"
+      flash[:error] = @booking.errors.full_messages
       render :new
     end
   end

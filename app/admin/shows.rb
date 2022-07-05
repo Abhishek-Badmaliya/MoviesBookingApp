@@ -15,13 +15,16 @@ ActiveAdmin.register Show do
   #   permitted
   # end
   
-  permit_params :show_date, :show_time, :movie_id, :theater_id
+  permit_params :show_date, :show_time, :total_seats, :show_price, :remaining_seats, :movie_id, :theater_id
 
   index do
     selectable_column
     id_column
     column :show_date
     column :show_time
+    column :total_seats
+    column :remaining_seats
+    column :show_price
     column :movie_id
     column :theater_id
     column :created_at
@@ -35,6 +38,8 @@ ActiveAdmin.register Show do
     f.inputs "Add Movie's Show Details" do
       f.input :show_date, as: :date_picker
       f.input :show_time, as: :time_picker
+      f.input :total_seats
+      f.input :show_price
       f.input :movie_id, label: 'Movie Name', as: :select, collection: Movie.all.map{ |m| [m.movie_title, m.id]}
       f.input :theater_id, label: 'Theater Name', as: :select, collection: Theater.all.map{ |t| [t.theater_name, t.id]}
     end
