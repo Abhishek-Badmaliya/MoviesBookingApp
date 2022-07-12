@@ -2,7 +2,7 @@
   <h4> The following errors prevented the Movie ! </h4>
   <ul>
     <% @movie.errors.full_messages.each do |msg| %>
-      <li class = "text-danger"> <%= msg %> </li>
+      <li class = "alert alert-danger"> <%= msg %> </li>
     <% end %>
   </ul>
 <% end %>
@@ -60,7 +60,7 @@
     </div>
   </div><br>
 
-  <div class="text-center">
+  <div class="text-center mb-4">
     <div class = "field form-group" >
       <%= link_to 'Dismiss', { controller: 'movies', action: 'index'}, class: "btn btn-danger" %>
     </div>

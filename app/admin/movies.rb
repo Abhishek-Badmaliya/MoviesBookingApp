@@ -47,7 +47,7 @@ ActiveAdmin.register Movie do
       f.input :movie_description
       f.input :movie_duration
       f.input :movie_language
-      f.input :movie_release_date
+      f.input :movie_release_date, as: :date_picker
       f.input :movie_rating
       f.input :category_id, label: 'Category Name', as: :select, collection: Category.all.map{ |c| [c.category_name, c.id]}
       f.input :theater_id, label: 'Theater Name', as: :select, collection: Theater.all.map{ |t| [t.theater_name, t.id]}

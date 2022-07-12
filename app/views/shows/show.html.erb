@@ -1,103 +1,43 @@
-<h2 class="text-center mt-4">Show Details</h2><hr>
+<h2 class="text-center mt-4">Show Details</h2>
 
 <% if @shows.count == 0 %>
   <div class="d-flex justify-content-center">
-    <div class="my-1">
+    <div class="my-4">
       <img src="https://cdn.dribbble.com/users/88213/screenshots/8560585/media/7263b7aaa8077a322b0f12a7cd7c7404.png?compress=1&resize=800x600&vertical=top" alt="image couldn't loaded!">
     </div>
   </div>
   <div class="d-flex justify-content-center">
-    <div class="my-4">
+    <div class="my-5">
       <%= link_to 'Back', { controller: 'movies', action: 'index'}, class: "btn btn-primary" %>
     </div>
   </div>
 <% else %>
 
-<% @shows.each do |show| %>
-  <div class="col-lg-8 mt-4">
-    <div class="card shadow mb-3">
-      <div class="card-body">      
-        <h4 class="card-title"><%= show.movie.movie_title %></h4>
-        <div class="row mt-3">
-          <div class="content-align-center">
-            <h4><span class="badge bg-primary"><strong>Total Seats : </strong><%= show.total_seats %></span></h4>
-            <h4><span class="badge bg-primary"><strong>Available Seats : </strong><%= show.remaining_seats %></span></h4>
+  <% @shows.each do |show| %>
+    <div class="justify-content-center mt-4">
+      <div class="card shadow mb-3">
+        <div class="card-body">      
+          <h4 class="card-title"><%= show.movie.movie_title %></h4>
+          <div class="row mt-3">
+            <div class="col-lg-7">
+              <h4><span class="badge bg-primary"><strong>Total Seats : </strong><%= show.total_seats %></span></h4>
+              <h4><span class="badge bg-primary"><strong>Available Seats : </strong><%= show.remaining_seats %></span></h4>
+            </div>
+            <div class="col-lg-5">
+              <h4><span class="badge"><%= link_to 'Book Now', new_booking_path(@booking), class: "text-decoration-none btn btn-success" %></span></h4>
+            </div>
           </div>
-          <div class="col-lg-5">
-          </div>
+          <p class="card-title"><strong>Show Date : </strong><%= show.show_date %></p>
+          <p class="card-title"><strong>Show Time : </strong><%= show.show_time.strftime("%H:%M") %></p>
+          <p class="card-title"><strong>Show Price : </strong><%= show.show_price %></p>
+          <p class="card-title"><strong>Theater Name : </strong><%= show.theater.theater_name %></p>
+          
+          <p class="card-text"><%= link_to 'Back', { controller: 'movies', action: 'index'}, class: "btn btn-danger" %></p>
         </div>
-        <p class="card-title"><strong>Show Date : </strong><%= show.show_date %></p>
-        <p class="card-title"><strong>Show Time : </strong><%= show.show_time.strftime("%H:%M") %></p>
-        <p class="card-title"><strong>Show Price : </strong><%= show.show_price %></p>
-        <p class="card-title"><strong>Theater Name : </strong><%= show.theater.theater_name %></p>
-        <p class="card-text"><%= link_to 'Back', { controller: 'movies', action: 'index'}, class: "btn btn-danger" %></p>
       </div>
     </div>
-  </div>
-  <div class="col-lg-4 mt-4">
-  </div>
-<%end%>
-
-<div class="col-lg-4 mt-4">
-  <div class="card shadow mb-3">
-    <div class="card-body">
-    <% if user_signed_in? %>
-      <h4 class="card-title mb-2">Book your seat now!</h4>
-      <%= form_with url: :bookings, data: {turbo: false} do |form| %>
-        <div class="form-group">
-          <%= form.label :full_name, class: "mb-2 mt-2" %>
-          <%= form.text_field :full_name, class: "form-control", required:true %>
-        </div>
-
-        <div class="form-group">
-          <%= form.label :email, class: "mb-2 mt-2" %>
-          <%= form.email_field :email, class: "form-control", required:true %>
-        </div>
-
-        <%# <div class="form-group">
-          <%= form.label :no_of_seats_you_want_to_book, class: "mb-2 mt-2" %>
-          <%# <%= form.number_field :number_of_seats, class: "form-control", required:true, min:1, max:@show.remaining_seats %>
-        <%# </div> %>
-        
-        <h4 class="mt-4 mb-3">Card Details </h4>
-        <hr>
-
-        <div class="form-group">
-          <%= form.label :card_number, class: "mb-2 mt-2" %>
-          <%= form.text_field :card_number, class: "form-control", required:true, minlength:12, maxlength:12 %>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="form-group">
-              <%= form.label :cvv, class: "mb-2 mt-2" %>
-              <%= form.text_field :cvv, class: "form-control", required:true, minlength:3, maxlength:3 %>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="form-group">
-              <%= form.label :month, class: "mb-2 mt-2" %>
-              <%= form.number_field :exp_month, class: "form-control", required:true, min:1, max:12 %>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="form-group">
-              <%= form.label :year, class: "mb-2 mt-2" %>
-              <%= form.number_field :exp_year, class: "form-control", required:true, min:2015, max:2027 %>
-            </div>
-          </div>
-        </div>
-
-        <div class="d-grid gap-2">
-          <%= form.submit "Book Your Tickets Now", class: "btn btn-outline-primary mt-3"%>
-        </div>
-
-      <% end %>
-    <% else %>
-      <h4 class="card-title mb-2">Blah has already been taken!</h4>
-    <% end %>
+    <div class="col-lg-4 mt-4">
     </div>
-  </div>
-</div>
+  <%end%>
 
 <% end %>
