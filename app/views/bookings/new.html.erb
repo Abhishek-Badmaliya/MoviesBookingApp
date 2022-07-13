@@ -260,7 +260,7 @@
         <td><input type="checkbox" class="form-check-input" value="J12"></td>
       </tr>
     </table>
-      
+      <% binding.pry %>
     <br/><button onclick="updateTextArea()">Confirm Selection</button>
   </center>
 </div>
@@ -306,6 +306,9 @@
   }
 
   function updateTextArea() {
+    <% binding.pry %>
+    debugger;
+    console.log('hello');
     if ($("input:checked").length == ($("#Numseats").val()))
     {
       $(".seatStructure *").prop("disabled", true);
@@ -316,9 +319,9 @@
       //Storing in Array
       allNumberVals.push($("#Numseats").val());
       $('#seatsBlock :checked').each(function() {
+        <% binding.pry %>
         allSeatsVals.push($(this).val());
       });
-      
       //Displaying 
       $('#NumberDisplay').val(allNumberVals);
       $('#seatsDisplay').val(allSeatsVals);
@@ -331,21 +334,6 @@
 
   function myFunction() {
     alert($("input:checked").length);
-  }
-
-  function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
   }
 
   $(":checkbox").click(function() {
