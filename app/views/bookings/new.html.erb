@@ -1,7 +1,5 @@
 <h2 class = "text-center mt-4" >Add Booking</h2><br>
 
-<%= render 'form' %>
-
 <br><br>
 
 <html>
@@ -14,12 +12,47 @@
 <div class="inputForm">
 <%= form_with(model:@booking, local: true, data: {turbo: false}) do |f| %>
 
-  Name *: <input type="text" id="Username" required>
-    <div class = "field form-group" >
-      <strong><%= f.label :number_of_seats %></strong>
-      <%= f.number_field :number_of_seats, id: "Numseats", class:"form-control" %>
-    </div><br>
-  <button onclick="takeData()">Start Selecting</button>
+  <div class = "field form-group" >
+    <strong><%= f.label :number_of_seats %></strong>
+    <%= f.number_field :number_of_seats, id: "Numseats", class:"form-control" %>
+  </div><br>
+
+  <div class = "field form-group" >
+    <%= f.hidden_field :selected_seats, class:"form-control" %>
+  </div><br>
+
+  <div class = "field form-group" >
+    <strong><%= f.label :show %></strong>
+    <%= f.select :show_id, Show.all.map { |c| [c.show_date, c.id]}, class:"form-control" %>
+  </div><br>
+
+  <div class = "field form-group" >
+    <strong><%= f.label :movie %></strong>
+    <%= f.select :movie_id, Movie.all.map { |c| [c.movie_title, c.id]}, class:"form-control" %>
+  </div><br>
+
+  <div class = "field form-group" >
+    <strong><%= f.label :theater %></strong>
+    <%= f.select :theater_id, Theater.all.map { |c| [c.theater_name, c.id]}, class:"form-control" %>
+  </div><br>
+
+  <div class = "field form-group" >
+    <strong><%= f.label :user %></strong>
+    <%= f.select :user_id, User.all.map { |c| [c.email, c.id]}, class:"form-control" %>
+  </div><br>
+
+  <div class="text-center">
+    <div class = "action" >
+      <%= f.button "Start Selecting", class:"btn btn-success", method: :get, onclick: "takeData()" %>
+    </div>
+  </div><br>
+
+  <div class="text-center">
+    <div class = "action" >
+      <%= f.button :submit, class:"btn btn-success" %>
+    </div>
+  </div><br>
+
 <% end %>
 </div>
   
@@ -238,12 +271,10 @@
   <center>
     <table class="Displaytable">
       <tr>
-        <th>Name</th>
         <th>Number of Seats</th>
         <th>Seats</th>
       </tr>
       <tr>
-        <td><textarea id="nameDisplay"></textarea></td>
         <td><textarea id="NumberDisplay"></textarea></td>
         <td><textarea id="seatsDisplay"></textarea></td>
       </tr>
@@ -256,19 +287,19 @@
 <script>
   function onLoaderFunc()
   {
-    $(".seatStructure *").prop("disabled", true);
-    $(".displayerBoxes *").prop("disabled", true);
+   /* $(".seatStructure *").prop("disabled", true);
+    $(".displayerBoxes *").prop("disabled", true); */
   }
 
   function takeData()
   {
-    if (( $("#Username").val().length == 0 ) || ( $("#Numseats").val().length == 0 ))
+    if ( $("#Numseats").val().length == 0 )
     {
       alert("Please Enter your Name and Number of Seats");
     }
     else
     {
-      $(".inputForm *").prop("disabled", true);
+      /* $(".inputForm *").prop("disabled", true); */
       $(".seatStructure *").prop("disabled", false);
       document.getElementById("notification").innerHTML = "<b style='margin-bottom:0px;background:red;'>Please Select your Seats NOW!</b>";
     }
@@ -279,19 +310,16 @@
     {
       $(".seatStructure *").prop("disabled", true);
       
-      var allNameVals = [];
       var allNumberVals = [];
       var allSeatsVals = [];
     
       //Storing in Array
-      allNameVals.push($("#Username").val());
       allNumberVals.push($("#Numseats").val());
       $('#seatsBlock :checked').each(function() {
         allSeatsVals.push($(this).val());
       });
       
       //Displaying 
-      $('#nameDisplay').val(allNameVals);
       $('#NumberDisplay').val(allNumberVals);
       $('#seatsDisplay').val(allSeatsVals);
     }
