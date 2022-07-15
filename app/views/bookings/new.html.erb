@@ -14,11 +14,11 @@
 
   <div class = "field form-group" >
     <strong><%= f.label :number_of_seats %></strong>
-    <%= f.number_field :number_of_seats, id: "Numseats", class:"form-control" %>
+    <%= f.number_field :number_of_seats, id: "Numseats", class:"form-control", placeholder: "Please enter the number of seats wants to book" %>
   </div><br>
 
   <div class = "field form-group" >
-    <%= f.hidden_field :selected_seats, class:"form-control" %>
+    <%= f.hidden_field :selected_seats, class:"form-control", id: "selected_nof_seats" %>
   </div><br>
 
   <div class = "field form-group" >
@@ -260,7 +260,6 @@
         <td><input type="checkbox" class="form-check-input" value="J12"></td>
       </tr>
     </table>
-      <% binding.pry %>
     <br/><button onclick="updateTextArea()">Confirm Selection</button>
   </center>
 </div>
@@ -306,9 +305,6 @@
   }
 
   function updateTextArea() {
-    <% binding.pry %>
-    debugger;
-    console.log('hello');
     if ($("input:checked").length == ($("#Numseats").val()))
     {
       $(".seatStructure *").prop("disabled", true);
@@ -319,12 +315,12 @@
       //Storing in Array
       allNumberVals.push($("#Numseats").val());
       $('#seatsBlock :checked').each(function() {
-        <% binding.pry %>
         allSeatsVals.push($(this).val());
       });
       //Displaying 
       $('#NumberDisplay').val(allNumberVals);
       $('#seatsDisplay').val(allSeatsVals);
+      document.getElementById("selected_nof_seats").value = document.getElementById("seatsDisplay").value
     }
     else
     {
