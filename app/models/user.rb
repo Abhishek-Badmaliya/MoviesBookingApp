@@ -18,4 +18,13 @@ class User < ApplicationRecord
   validates :contact_number, presence: true, uniqueness: true, numericality: {only_integer: true}
 
   has_many :bookings
+
+  def to_s
+    email
+  end
+
+  after_create do
+    customer = Stripe::Customer.create(email: email)
+    update(stripe_customer_id: customer.id)
+  end
 end
