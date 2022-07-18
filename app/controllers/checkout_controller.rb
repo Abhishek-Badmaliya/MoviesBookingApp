@@ -3,6 +3,7 @@ class CheckoutController < ApplicationController
     show = Show.find(params[:id])
     movie = Movie.find(show.movie_id)
     @session = Stripe::Checkout::Session.create({
+      customer: current_user.stripe_customer_id,
       payment_method_types: ['card'],
       line_items: [{
 				name: movie.movie_title,
