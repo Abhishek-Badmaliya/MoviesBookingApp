@@ -36,7 +36,7 @@ ActiveAdmin.register Show do
 
   form do |f|
     f.inputs "Add Movie's Show Details" do
-      f.input :show_date, as: :date_picker
+      f.input :show_date, as: :date_picker, datepicker_options: { min_date: "1999-12-12", max_date: "2030-12-12"}
       f.input :show_time, as: :time_picker
       f.input :total_seats
       f.input :show_price
