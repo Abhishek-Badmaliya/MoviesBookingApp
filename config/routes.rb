@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   end
   post "checkout/create", to: "checkout#create"
 
+  get "success", to: "checkout#success"
+  get "failure", to: "checkout#failure"
+
   root "pages#home"
   get '/pages', to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
