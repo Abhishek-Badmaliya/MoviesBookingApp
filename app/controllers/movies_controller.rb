@@ -4,6 +4,15 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: [:edit, :update, :show, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
 
+  def search_queries
+    if params[:search_query]
+      @qry = params.fetch(:search_query)
+      @movies = Movie.search(@qry, fields: ['movie_title', 'movie_description', 'movie_language'])
+    else
+      flash[:error] = "Oops, there were no record could be found !"
+    end
+  end
+
   def index
     if params[:category].blank?
       @movies = Movie.all.order("created_at DESC")
@@ -60,6 +69,6 @@ class MoviesController < ApplicationController
     end
 
     def movie_params
-      params.require(:movie).permit(:movie_title, :movie_description, :movie_duration, :movie_language, :movie_release_date, :movie_rating, :category_id, :image, :theater_id)
+      params.require(:movie).permit(:search_query, :movie_title, :movie_description, :movie_duration, :movie_language, :movie_release_date, :movie_rating, :category_id, :image, :theater_id)
     end
 end

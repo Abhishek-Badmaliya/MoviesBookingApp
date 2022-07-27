@@ -77,3 +77,9 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "elasticsearch-rails", "~> 7.2"
+gem "elasticsearch-model", "~> 7.2"
+gem "elasticsearch-persistence", "~> 7.2"
+gem "searchkick"
+gem "elasticsearch"

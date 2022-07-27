@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   end
   post "checkout/create", to: "checkout#create"
 
+  get "search_queries", to: "movies#search_queries"
+
   get "success", to: "checkout#success"
   get "failure", to: "checkout#failure"
 
