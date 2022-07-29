@@ -1,5 +1,5 @@
 class Movie < ApplicationRecord
-  validates :movie_title, :movie_description, :movie_duration, :movie_language, :movie_release_date, :movie_country, :movie_rating, :category_id, presence: true
+  validates :movie_title, :movie_description, :movie_duration, :movie_language, :movie_release_date, :movie_rating, :category_id, presence: true
 
   has_one_attached :image
 
