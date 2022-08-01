@@ -11,6 +11,7 @@ class Ability
       #can :read, :all
       can :create, Booking
       can :read, Show
+      can :search_queries, Movie
       can :read, Movie
       #cannot :create, :edit, :destroy, Show
       cannot :manage, ActiveAdmin::Page

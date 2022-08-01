@@ -6,7 +6,7 @@
           class="img-fluid" alt="Phone image">
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= form_for(resource, data: { turbo: false }, as: resource_name, url: session_path(resource_name)) do |f| %>
           <!-- Email input -->
           <div class="form-outline mb-4">
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control form-control-lg", id:"form1Example13" %>
