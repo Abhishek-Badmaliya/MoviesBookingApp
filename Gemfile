@@ -54,6 +54,8 @@ gem 'stripe'
 gem 'pry'
 gem "rolify"
 gem 'cancancan'
+gem 'will_paginate', '~> 3.3'
+gem 'will_paginate-bootstrap4'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
