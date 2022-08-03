@@ -4,8 +4,13 @@ Rails.application.routes.draw do
   devise_for :users
   resources :movies
   resources :theaters
-  resources :shows
-  resources :bookings
+  resources :shows do
+    resources :bookings
+  end
+  post "checkout/create", to: "checkout#create"
+
+  get "success", to: "checkout#success"
+  get "failure", to: "checkout#failure"
 
   root "pages#home"
   get '/pages', to: "pages#home"

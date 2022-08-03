@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_04_135242) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_18_184102) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -66,7 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_135242) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.date "booking_date"
+    t.string "selected_seats"
     t.integer "number_of_seats"
     t.integer "booking_status"
     t.integer "show_id", null: false
@@ -142,6 +142,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_135242) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_customer_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
