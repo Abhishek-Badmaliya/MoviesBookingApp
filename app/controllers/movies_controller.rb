@@ -15,7 +15,7 @@ class MoviesController < ApplicationController
 
   def index
     if params[:category].blank?
-      @movies = Movie.paginate(page: params[:page], per_page: 3)
+      @movies = Movie.paginate(page: params[:page], per_page: 9)
     else
       @category_id = Category.find_by(category_name: params[:category]).id
       @movies = Movie.where(category_id: @category_id).order("created_at DESC").paginate(page: params[:page], per_page: 3)
