@@ -13,19 +13,22 @@
   </div>
 <% else %>
   <div class="row justify-content-around ">
-      <% @movies.each do |movie| %>
-        <div class="card col-lg-4 col-md-4 col-sm-4 col-12 d-flex flex-column align-items-center mx-auto">
-            <div class ="card style="width: 18rem;">
-              <div class="col">
-                  <% if movie.image.attached? %>
-                    <%= image_tag movie.image, height: "700px", width: "700px", class: "card-img-top" %>
-                  <% end %>
-                  <div class="card-body">
-                    <h5 class="card-title text-center"><%= link_to movie.movie_title, movie_path(movie) %></h5>
-                  </div>
-              </div>
+    <% @movies.each do |movie| %>
+      <div class="card col-lg-4 col-md-4 col-sm-4 col-12 d-flex flex-column align-items-center mx-auto">
+          <div class ="card style="width: 18rem;">
+            <div class="col">
+                <% if movie.image.attached? %>
+                  <%= image_tag movie.image, height: "700px", width: "700px", class: "card-img-top" %>
+                <% end %>
+                <div class="card-body">
+                  <h5 class="card-title text-center"><%= link_to movie.movie_title, movie_path(movie) %></h5>
+                </div>
             </div>
-        </div>
-      <%end%>
+          </div>
+      </div>
+    <%end%>
+    <div class="d-flex justify-content-center mt-4 mb-2">
+      <%= will_paginate @movies, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>
   </div>
 <%end%>

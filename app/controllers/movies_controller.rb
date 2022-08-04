@@ -7,7 +7,7 @@ class MoviesController < ApplicationController
   def search_queries
     if params[:search_query]
       @qry = params.fetch(:search_query)
-      @movies = Movie.search(@qry, fields: ['movie_title', 'movie_description', 'movie_language'])
+      @movies = Movie.search(@qry, fields: ['movie_title', 'movie_description', 'movie_language'], page: params[:page], per_page: 3)
     else
       flash[:error] = "Oops, there were no record could be found !"
     end
