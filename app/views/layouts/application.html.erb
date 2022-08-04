@@ -25,12 +25,16 @@
 
   <body>
     <%= render "layouts/header" %>
-      <% if notice %>
-        <p class="alert alert-success text-center"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert alert-danger text-center"><%= alert %></p>
-      <% end %>
+      <% flash.each do |name,msg|%>
+        <%if name=='alert'%>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%else%>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <% end %>
+          <%=msg%>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <%end%>
       <div class="container">
         <%= yield %>
       </div>

@@ -8,9 +8,15 @@
       <p class="card-title"><strong>Show Time : </strong><%= @show.show_time.strftime("%H:%M") %></p>
       <p class="card-title"><strong>Show Price : </strong><%= number_to_currency(@show.show_price) %></p>
       <p class="card-title"><strong>Theater Name : </strong><%= @show.theater.theater_name %></p>
-      <%= link_to 'Edit', edit_movie_show_path(@movie,@show), class: "text-decoration-none btn btn-dark" %>
-      <%= button_to 'Delete', movie_show_path(@movie,@show), method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: "btn btn-danger" %>
-      <p class="card-text"><%= link_to 'Back', { controller: 'movies', action: 'index'}, class: "btn btn-primary" %></p>
+      <div class="text-center">
+        <% if user_signed_in? %>
+          <% if current_user.has_role? :admin %>
+            <p class="text-center"><%= link_to 'Edit', edit_movie_show_path(@movie,@show), class: "text-decoration-none btn btn-dark" %></p>
+            <p class="card-title"><%= button_to 'Delete', movie_show_path(@movie,@show), method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: "btn btn-danger" %></p>
+          <% end %>
+        <% end %>
+      </div>
+      <p class="text-center"><%= link_to 'Back', { controller: 'movies', action: 'index'}, class: "btn btn-primary" %></p>
     </div>
   </div>
 </div>

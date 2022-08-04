@@ -10,7 +10,7 @@ class Booking < ApplicationRecord
   after_create :update_show_seats_count
 
   def update_show_seats_count
-    show.update(remaining_seats: show.total_seats - number_of_seats)
+    show.update(remaining_seats: show.remaining_seats - number_of_seats)
   end
 
    #after_create do

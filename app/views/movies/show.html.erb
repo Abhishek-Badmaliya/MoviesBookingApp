@@ -6,7 +6,7 @@
       </div>
       <div class="col-md-5">
         <div class="card-body">
-          <h5 class="card-title"><%= @movie.movie_title %></h5><br>
+          <h4 class="card-title"><%= @movie.movie_title %></h4><br>
           <p class="card-text"><strong>Description : </strong><%= @movie.movie_description %></p>
           <p class="card-text"><strong>Duration : </strong><%= @movie.movie_duration %> Minutes</p>
           <p class="card-text"><strong>Language : </strong><%= @movie.movie_language %></p>
@@ -17,6 +17,12 @@
         </div>
         <div class="card-body btn-group" role="group">
           <%= link_to 'Show Details', movie_shows_path(@movie), class: "text-decoration-none btn btn-secondary" %>
+          <% if user_signed_in? %>
+            <% if current_user.has_role? :admin %>
+              <%= link_to 'Edit', edit_movie_path(@movie), class: "text-decoration-none btn btn-dark" %>
+              <%= button_to 'Delete', movie_path(@movie), method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: "btn btn-danger" %>
+            <% end %>
+          <% end %>
           <%= link_to 'Go Back', { controller: 'movies', action: 'index'}, class: "btn btn-primary" %>
         </div>
       </div>

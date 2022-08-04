@@ -5,43 +5,64 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav mb-2 mb-lg-0">
 
         <li class="nav-item">
-          <%= link_to "Home Page", movies_path, class:"nav-link" %>
+          <% if user_signed_in? %>
+            <%= link_to "Home Page", movies_path, class:"nav-link" %>
+          <% end %>
         </li>
 
         <li class="nav-item">
           <% if user_signed_in? %>
-            <li><%= link_to current_user.email, edit_user_registration_path, class: "nav-link" %></li>
-            <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "nav-link" %></li>
-          <% else %>
-            <li><%= link_to 'Sign In', new_user_session_path, class: "nav-link" %></li>
-            <li><%= link_to 'Sign Up', new_user_registration_path, class: "nav-link" %></li>
+            <% if current_user.has_role? :admin %>
+              <%= link_to "Add Movie", new_movie_path, class:"nav-link" %>
+            <% end %>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <% if current_user.has_role? :admin %>
+              <%= link_to "Add Theater", new_theater_path, class:"nav-link" %>
+            <% end %>
           <% end %>
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Movies Categories
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <% Category.all.each do |category| %>
-              <li><%= link_to category.category_name, movies_path(category: category.category_name), class:"dropdown-item" %></li>
-            <% end %>
-          </ul>
+          <% if user_signed_in? %>
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Movies Categories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% Category.all.each do |category| %>
+                <li><%= link_to category.category_name, movies_path(category: category.category_name), class:"dropdown-item" %></li>
+              <% end %>
+            </ul>
+          <% end %>
         </li>
-
-        <li class="nav-item">
-          <div class="container-fluid">
-            <%= form_tag(search_queries_path, method: :get, class: "d-flex") do %>
-              <%= text_field_tag :search_query, params[:search_query], class:"form-control me-2" %>
-              <%= submit_tag ("Search"), class: "btn btn-outline-success" %>
-            <% end %>
-          </div>
-        </li>
-
+        
       </ul>
+
+      <div class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <% if user_signed_in? %>
+          <%= form_tag(search_queries_path, method: :get, class: "d-flex") do %>
+            <%= text_field_tag :search_query, params[:search_query], class: "form-control me-3" %>
+            <%= submit_tag ("Search"), class: "btn btn-outline-light" %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="d-flex">
+        <% if user_signed_in? %>
+          <li><%= link_to 'My Profile', profiles_path, class: "btn btn-primary text-decoration-none" %></li>
+          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "btn btn-danger" %></li>
+        <% else %>
+          <li><%= link_to 'Sign In', new_user_session_path, class: "btn btn-light" %></li>
+          <li><%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-light" %></li>
+        <% end %>
+      </div>
+
     </div>
   </div>
 </nav>

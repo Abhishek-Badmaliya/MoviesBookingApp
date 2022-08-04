@@ -17,8 +17,8 @@ Rails.application.routes.draw do
 
   root "pages#home"
   get '/pages', to: "pages#home"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  #add routes for show user's profile
+  # resources :users, only: [:show]
+  get 'profiles', to: "profiles#show"
 end

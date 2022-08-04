@@ -46,6 +46,15 @@ class CheckoutController < ApplicationController
 		# @session_with_expand.line_items.data.each do |line_item|
 		# 	show = Show.find_by(stripe_show_id: line_item.price.product)
     # end
+
+    if booking.save
+      session[:number_of_seats] = nil
+      session[:selected_seats] = nil
+      session[:show_id] = nil
+      session[:theater_id] = nil
+      session[:movie_id] = nil
+      session[:user_id] = nil
+    end
 	end
 
 	def failure

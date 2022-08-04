@@ -9,6 +9,7 @@ class Ability
     else
       can :create, Booking
       can :read, Show
+      can :search_queries, Movie
       can :read, Movie
       cannot :manage, ActiveAdmin::Page
     end
