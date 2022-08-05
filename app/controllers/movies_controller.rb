@@ -7,7 +7,7 @@ class MoviesController < ApplicationController
   def search_queries
     if params[:search_query]
       @qry = params.fetch(:search_query)
-      @movies = Movie.search(@qry, fields: ['movie_title', 'movie_description', 'movie_language'])
+      @movies = Movie.search(@qry, fields: ['movie_title', 'movie_description', 'movie_language'], page: params[:page], per_page: 3)
     else
       flash[:error] = "Oops, there were no record could be found !"
     end
@@ -15,10 +15,10 @@ class MoviesController < ApplicationController
 
   def index
     if params[:category].blank?
-      @movies = Movie.all.order("created_at DESC")
+      @movies = Movie.paginate(page: params[:page], per_page: 9)
     else
       @category_id = Category.find_by(category_name: params[:category]).id
-      @movies = Movie.where(category_id: @category_id).order("created_at DESC")
+      @movies = Movie.where(category_id: @category_id).order("created_at DESC").paginate(page: params[:page], per_page: 3)
     end
   end
 

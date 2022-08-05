@@ -13,8 +13,8 @@
   </div>
 <% else %>
   <div class="row justify-content-around ">
-      <% @movies.each do |movie| %>
-    <div class="card col-lg-4 col-md-4 col-sm-4 col-12 d-flex flex-column align-items-center mx-auto">
+    <% @movies.each do |movie| %>
+      <div class="card col-lg-4 col-md-4 col-sm-4 col-12 d-flex flex-column align-items-center mx-auto">
         <div class ="card style="width: 18rem;">
           <div class="col">
               <% if movie.image.attached? %>
@@ -25,7 +25,10 @@
               </div>
           </div>
         </div>
+      </div>
+    <%end%>
+    <div class="d-flex justify-content-center mt-4 mb-2">
+      <%= will_paginate @movies, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
     </div>
-      <%end%>
   </div>
 <%end%>
