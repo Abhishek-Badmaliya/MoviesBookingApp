@@ -11,13 +11,16 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_07_20_130958) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.string "author_type"
-    t.integer "author_id"
+    t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
@@ -69,10 +72,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_20_130958) do
     t.string "selected_seats"
     t.integer "number_of_seats"
     t.integer "booking_status"
-    t.integer "show_id", null: false
-    t.integer "user_id", null: false
-    t.integer "movie_id", null: false
-    t.integer "theater_id", null: false
+    t.bigint "show_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "movie_id", null: false
+    t.bigint "theater_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_bookings_on_movie_id"
@@ -95,7 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_20_130958) do
     t.date "movie_release_date"
     t.integer "movie_rating"
     t.integer "category_id"
-    t.integer "theater_id"
+    t.bigint "theater_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["theater_id"], name: "index_movies_on_theater_id"
@@ -104,7 +107,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_20_130958) do
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
@@ -115,8 +118,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_20_130958) do
   create_table "shows", force: :cascade do |t|
     t.date "show_date"
     t.datetime "show_time"
-    t.integer "movie_id"
-    t.integer "theater_id"
+    t.bigint "movie_id"
+    t.bigint "theater_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "total_seats"
@@ -130,7 +133,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_20_130958) do
     t.string "theater_name"
     t.string "city"
     t.text "theater_address"
-    t.integer "movie_id"
+    t.bigint "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_theaters_on_movie_id"
@@ -159,8 +162,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_20_130958) do
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "role_id"
+    t.bigint "user_id"
+    t.bigint "role_id"
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"

@@ -31,14 +31,14 @@ ActiveAdmin.register Theater do
   filter :theater_name
   filter :city
   filter :theater_address
-  filter :movie_id, as: :select, collection: Movie.all.map{ |m| [m.movie_title, m.id]}
+  # filter :movie_id, as: :select, collection: Movie.all.map{ |m| [m.movie_title, m.id]}
 
   form do |f|
     f.inputs "Add Theater's Detail" do
       f.input :theater_name
       f.input :city
       f.input :theater_address
-      f.input :movie_id, label: 'Movie', as: :select, collection: Movie.all.map{ |m| [m.movie_title, m.id]}
+      # f.input :movie_id, label: 'Movie', as: :select, collection: Movie.all.map{ |m| [m.movie_title, m.id]}
     end
     f.actions
   end

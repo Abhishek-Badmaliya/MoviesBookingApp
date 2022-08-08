@@ -48,8 +48,9 @@
         <% if user_signed_in? %>
           <%= form_tag(search_queries_path, method: :get, class: "d-flex") do %>
             <%= text_field_tag :search_query, params[:search_query], class: "form-control me-3" %>
-            <%= submit_tag ("Search"), class: "btn btn-outline-light" %>
+            <%= submit_tag ("Search"), class: "btn btn-outline-light me-3" %>
           <% end %>
+          <%= button_to 'Clear', movies_path, method: :get, class: "btn btn-outline-light" %>
         <% end %>
       </div>
 

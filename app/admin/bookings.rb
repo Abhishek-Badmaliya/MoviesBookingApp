@@ -31,6 +31,6 @@ ActiveAdmin.register Booking do
   end
 
   filter :booking_status
-  filter :movie_id, as: :select, collection: Movie.all.map{ |c| [c.movie_title, c.id]}
-  filter :theater_id, as: :select, collection: Theater.all.map{ |t| [t.theater_name, t.id]}
+  # filter :movie_id, as: :select, collection: Movie.all.map{ |c| [c.movie_title, c.id]}
+  # filter :theater_id, as: :select, collection: Theater.all.map{ |t| [t.theater_name, t.id]}
 end
