@@ -37,8 +37,8 @@ ActiveAdmin.register Movie do
   filter :movie_language
   filter :movie_release_date
   filter :movie_rating
-  # filter :category_id, as: :select, collection: Category.all.map{ |c| [c.category_name, c.id]}
-  # filter :theater_id, as: :select, collection: Theater.all.map{ |t| [t.theater_name, t.id]}
+  filter :category_id, as: :select, collection: Category.all.map{ |c| [c.category_name, c.id]}
+  filter :theater_id, as: :select, collection: Theater.all.map{ |t| [t.theater_name, t.id]}
 
   form do |f|
     f.inputs "Add Movie's Detail" do
@@ -49,8 +49,8 @@ ActiveAdmin.register Movie do
       f.input :movie_language
       f.input :movie_release_date, as: :date_picker
       f.input :movie_rating
-      # f.input :category_id, label: 'Category Name', as: :select, collection: Category.all.map{ |c| [c.category_name, c.id]}
-      # f.input :theater_id, label: 'Theater Name', as: :select, collection: Theater.all.map{ |t| [t.theater_name, t.id]}
+      f.input :category_id, label: 'Category Name', as: :select, collection: Category.all.map{ |c| [c.category_name, c.id]}
+      f.input :theater_id, label: 'Theater Name', as: :select, collection: Theater.all.map{ |t| [t.theater_name, t.id]}
     end
     f.actions
   end

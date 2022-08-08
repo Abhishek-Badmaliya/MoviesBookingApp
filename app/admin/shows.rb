@@ -31,8 +31,8 @@ ActiveAdmin.register Show do
     actions
   end
 
-  # filter :movie_id, as: :select, collection: Movie.all.map{ |m| [m.movie_title, m.id]}
-  # filter :theater_id, as: :select, collection: Theater.all.map{ |t| [t.theater_name, t.id]}
+  filter :movie_id, as: :select, collection: Movie.all.map{ |m| [m.movie_title, m.id]}
+  filter :theater_id, as: :select, collection: Theater.all.map{ |t| [t.theater_name, t.id]}
 
   form do |f|
     f.inputs "Add Movie's Show Details" do
@@ -40,8 +40,8 @@ ActiveAdmin.register Show do
       f.input :show_time, as: :time_picker
       f.input :total_seats
       f.input :show_price
-      # f.input :movie_id, label: 'Movie Name', as: :select, collection: Movie.all.map{ |m| [m.movie_title, m.id]}
-      # f.input :theater_id, label: 'Theater Name', as: :select, collection: Theater.all.map{ |t| [t.theater_name, t.id]}
+      f.input :movie_id, label: 'Movie Name', as: :select, collection: Movie.all.map{ |m| [m.movie_title, m.id]}
+      f.input :theater_id, label: 'Theater Name', as: :select, collection: Theater.all.map{ |t| [t.theater_name, t.id]}
     end
     f.actions
   end
