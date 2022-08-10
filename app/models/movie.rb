@@ -10,11 +10,11 @@ class Movie < ApplicationRecord
   belongs_to :theater
 
   include PgSearch::Model
-  pg_search_scope :search_query, against: [:movie_title, :movie_description]
+  pg_search_scope :search_query, against: [:movie_title, :movie_description], using: {tsearch: {prefix: true}}  
 
-  def self.text_search(search_query)
-    if search_query.present?
-      where("movie_title @@ :q or movie_description @@ :q", q: search_query)
+  def self.text_search(query)
+    if query.present?
+      search_query(query)
     else
       scoped
     end
