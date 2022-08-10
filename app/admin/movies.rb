@@ -54,4 +54,22 @@ ActiveAdmin.register Movie do
     end
     f.actions
   end
+
+  show do
+    attributes_table do
+      row :movie_title
+      row :movie_description
+      row :movie_duration
+      row :movie_language
+      row :movie_release_date
+      row :movie_rating
+      row :category
+      row :theater
+      row :created_at
+      row :updated_at
+      row :image do |image|
+        image_tag url_for(image.image), style: "width: 20%"
+      end
+    end
+  end
 end
