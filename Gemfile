@@ -57,6 +57,8 @@ gem 'cancancan'
 gem 'will_paginate', '~> 3.3'
 gem 'will_paginate-bootstrap4'
 gem 'pg_search'
+gem 'twilio-ruby'
+gem 'phonelib'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -80,3 +82,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "sidekiq", "~> 6.5"

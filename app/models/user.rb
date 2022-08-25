@@ -18,7 +18,7 @@ class User < ApplicationRecord
   end
 
   validates :first_name, :last_name, :gender, presence: true
-  validates :contact_number, presence: true, uniqueness: true, numericality: {only_integer: true}
+  validates :contact_number, phone: true
 
   has_many :bookings, dependent: :destroy
 

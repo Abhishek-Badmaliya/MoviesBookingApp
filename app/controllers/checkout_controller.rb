@@ -35,6 +35,7 @@ class CheckoutController < ApplicationController
     
     @session_with_expand = Stripe::Checkout::Session.retrieve({ id: params[:session_id], expand: ["payment_intent", "line_items"] })
     PaymentSuccessMailer.new_payment_email(current_user, @session_with_expand).deliver_now
+    MsgUserJob.perform_now(current_user, @session_with_expand)
 
     if booking.save
       session[:number_of_seats] = nil
